@@ -1,0 +1,12 @@
+{
+  "apiVersion": 3,
+  "name": "meu-tema-base/servicos-lista",
+  "title": "Lista de Serviços",
+  "category": "widgets",
+  "icon": "portfolio",
+  "description": "Bloco dinâmico para listar serviços.",
+  "keywords": ["serviços", "acf", "gutenberg"],
+  "textdomain": "meu-tema-base",
+  "editorScript": "mtb-servicos-lista-editor",
+  "render": "file:./render.php"
+}
