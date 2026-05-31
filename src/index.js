@@ -1,15 +1,8 @@
 import ServicesList from './components/ServicesList';
+import QueryControls from './components/QueryControls';
 import { registerBlockType } from '@wordpress/blocks';
 import { useEffect, useState } from '@wordpress/element';
-import {
-	InspectorControls
-} from '@wordpress/block-editor';
-import {
-	PanelBody,
-	RangeControl,
-	ToggleControl,
-	Spinner
-} from '@wordpress/components';
+import { Spinner } from '@wordpress/components';
 import apiFetch from '@wordpress/api-fetch';
 
 registerBlockType(
@@ -38,29 +31,10 @@ registerBlockType(
 
 			return (
 				<div className="mtb-editor-preview">
-					<InspectorControls>
-						<PanelBody title="Configurações" initialOpen={ true }>
-							<RangeControl
-								label="Quantidade"
-								value={ attributes.quantidade }
-								onChange={ ( value ) =>
-									setAttributes( { quantidade: value } )
-								}
-								min={ 1 }
-								max={ 12 }
-							/>
-
-							<ToggleControl
-								label="Somente destaques"
-								checked={ attributes.somenteDestaques }
-								onChange={ ( value ) =>
-									setAttributes( {
-										somenteDestaques: value,
-									} )
-								}
-							/>
-						</PanelBody>
-					</InspectorControls>
+					<QueryControls
+						attributes={ attributes }
+						setAttributes={ setAttributes }
+					/>
 
 					<h3>Lista de Serviços</h3>
 
