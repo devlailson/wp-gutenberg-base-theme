@@ -3,6 +3,7 @@ import {
 	PanelBody,
 	RangeControl,
 	ToggleControl,
+	SelectControl,
 } from '@wordpress/components';
 
 export default function QueryControls( {
@@ -28,6 +29,33 @@ export default function QueryControls( {
 					onChange={ ( value ) =>
 						setAttributes( {
 							somenteDestaques: value,
+						} )
+					}
+				/>
+				<SelectControl
+					label="Categoria"
+					value={ attributes.categoria }
+					options={ [
+						{
+							label: 'Todas',
+							value: '',
+						},
+						{
+							label: 'Design',
+							value: 'design',
+						},
+						{
+							label: 'Marketing',
+							value: 'marketing',
+						},
+						{
+							label: 'Desenvolvimento',
+							value: 'desenvolvimento',
+						},
+					] }
+					onChange={ ( value ) =>
+						setAttributes( {
+							categoria: value,
 						} )
 					}
 				/>

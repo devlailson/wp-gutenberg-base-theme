@@ -21,6 +21,10 @@ function mtb_register_servicos_rest_route() {
 					'default'           => false,
 					'sanitize_callback' => 'rest_sanitize_boolean',
 				),
+				'categoria' => array(
+					'default'           => '',
+					'sanitize_callback' => 'sanitize_text_field',
+				),
 			),
 		)
 	);
@@ -32,20 +36,28 @@ function mtb_get_servicos_rest( WP_REST_Request $request ) {
 
 	$quantidade = $request->get_param( 'quantidade' );
 	$destaque   = $request->get_param( 'destaque' );
-
+	$categoria  = $request->get_param( 'categoria' );
 	$args = array(
 		'post_type'      => 'servico',
 		'posts_per_page' => $quantidade ? $quantidade : 6,
 		'post_status'    => 'publish',
+		'meta_query'     => array(),
 	);
 
 	if ( $destaque ) {
-		$args['meta_query'] = array(
-			array(
-				'key'     => 'destaque',
-				'value'   => '1',
-				'compare' => '=',
-			),
+		$args['meta_query'][] = array(
+			'key'     => 'destaque',
+			'value'   => '1',
+			'compare' => '=',
+		);
+	}
+
+	if ( $categoria ) {
+
+		$args['meta_query'][] = array(
+			'key'     => 'categoria',
+			'value'   => $categoria,
+			'compare' => '=',
 		);
 	}
 

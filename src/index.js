@@ -16,7 +16,8 @@ registerBlockType(
 				loading,
 			} = useServices(
 				attributes.quantidade,
-				attributes.somenteDestaques
+				attributes.somenteDestaques,
+				attributes.categoria
 			);
 
 			return (

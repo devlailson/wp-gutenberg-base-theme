@@ -3,7 +3,8 @@ import apiFetch from '@wordpress/api-fetch';
 
 export default function useServices(
 	quantidade,
-	somenteDestaques
+	somenteDestaques,
+	categoria
 ) {
 
 	const [ servicos, setServicos ] = useState( [] );
@@ -19,7 +20,9 @@ export default function useServices(
 				'/mtb/v1/servicos?quantidade=' +
 				quantidade +
 				'&destaque=' +
-				somenteDestaques,
+				somenteDestaques +
+				'&categoria=' +
+				categoria,
 		} )
 
 		.then( ( response ) => {
@@ -30,7 +33,7 @@ export default function useServices(
 
 		} );
 
-	}, [ quantidade, somenteDestaques ] );
+	}, [ quantidade, somenteDestaques, categoria ] );
 
 	return {
 		servicos,
