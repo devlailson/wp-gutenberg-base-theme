@@ -29,6 +29,16 @@ function mtb_register_servicos_rest_route() {
 		)
 	);
 
+	register_rest_route(
+		'mtb/v1',
+		'/categorias',
+		array(
+			'methods'             => 'GET',
+			'callback'            => 'mtb_get_categorias_rest',
+			'permission_callback' => '__return_true',
+		)
+	);
+
 }
 add_action( 'rest_api_init', 'mtb_register_servicos_rest_route' );
 
@@ -83,5 +93,22 @@ function mtb_get_servicos_rest( WP_REST_Request $request ) {
 	wp_reset_postdata();
 
 	return rest_ensure_response( $servicos );
+
+}
+
+function mtb_get_categorias_rest() {
+
+	global $wpdb;
+
+	$categorias = $wpdb->get_col(
+		"
+		SELECT DISTINCT meta_value
+		FROM {$wpdb->postmeta}
+		WHERE meta_key = 'categoria'
+		AND meta_value != ''
+		"
+	);
+
+	return rest_ensure_response( $categorias );
 
 }

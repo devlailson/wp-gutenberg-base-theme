@@ -1,3 +1,5 @@
+import useCategories from '../hooks/useCategories';
+
 import { InspectorControls } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -10,6 +12,12 @@ export default function QueryControls( {
 	attributes,
 	setAttributes,
 } ) {
+
+	const {
+		categorias,
+		loadingCategories,
+	} = useCategories();
+
 	return (
 		<InspectorControls>
 			<PanelBody title="Configurações" initialOpen={ true }>
@@ -33,32 +41,28 @@ export default function QueryControls( {
 					}
 				/>
 				<SelectControl
-					label="Categoria"
-					value={ attributes.categoria }
-					options={ [
-						{
-							label: 'Todas',
-							value: '',
-						},
-						{
-							label: 'Design',
-							value: 'design',
-						},
-						{
-							label: 'Marketing',
-							value: 'marketing',
-						},
-						{
-							label: 'Desenvolvimento',
-							value: 'desenvolvimento',
-						},
-					] }
-					onChange={ ( value ) =>
-						setAttributes( {
-							categoria: value,
-						} )
-					}
-				/>
+				label="Categoria"
+				value={ attributes.categoria }
+				disabled={ loadingCategories }
+				options={ [
+					{
+						label: loadingCategories
+							? 'Carregando categorias...'
+							: 'Todas',
+						value: '',
+					},
+					...categorias.map( ( categoria ) => ( {
+						label: categoria,
+						value: categoria,
+					} ) ),
+				] }
+				onChange={ ( value ) =>
+					setAttributes( {
+						categoria: value,
+					} )
+				}
+			/>
+			
 			</PanelBody>
 		</InspectorControls>
 	);
