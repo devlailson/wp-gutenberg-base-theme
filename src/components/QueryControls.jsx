@@ -12,7 +12,6 @@ export default function QueryControls( {
 	attributes,
 	setAttributes,
 } ) {
-
 	const {
 		categorias,
 		loadingCategories,
@@ -40,29 +39,29 @@ export default function QueryControls( {
 						} )
 					}
 				/>
+
 				<SelectControl
-				label="Categoria"
-				value={ attributes.categoria }
-				disabled={ loadingCategories }
-				options={ [
-					{
-						label: loadingCategories
-							? 'Carregando categorias...'
-							: 'Todas',
-						value: '',
-					},
-					...categorias.map( ( categoria ) => ( {
-						label: categoria,
-						value: categoria,
-					} ) ),
-				] }
-				onChange={ ( value ) =>
-					setAttributes( {
-						categoria: value,
-					} )
-				}
-			/>
-			
+					label="Categoria"
+					value={ attributes.categoria }
+					disabled={ loadingCategories }
+					options={ [
+						{
+							label: loadingCategories
+								? 'Carregando categorias...'
+								: 'Todas',
+							value: '',
+						},
+						...categorias.map( ( categoria ) => ( {
+							label: categoria,
+							value: categoria,
+						} ) ),
+					] }
+					onChange={ ( value ) =>
+						setAttributes( {
+							categoria: value,
+						} )
+					}
+				/>
 			</PanelBody>
 		</InspectorControls>
 	);
