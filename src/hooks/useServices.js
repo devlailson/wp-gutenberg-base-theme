@@ -4,15 +4,13 @@ import apiFetch from '@wordpress/api-fetch';
 export default function useServices(
 	quantidade,
 	somenteDestaques,
-	categoria
+	categoria,
+	ordenacao
 ) {
-
 	const [ servicos, setServicos ] = useState( [] );
-
 	const [ loading, setLoading ] = useState( true );
 
 	useEffect( () => {
-
 		setLoading( true );
 
 		apiFetch( {
@@ -22,22 +20,17 @@ export default function useServices(
 				'&destaque=' +
 				somenteDestaques +
 				'&categoria=' +
-				categoria,
-		} )
-
-		.then( ( response ) => {
-
+				categoria +
+				'&ordenacao=' +
+				ordenacao,
+		} ).then( ( response ) => {
 			setServicos( response );
-
 			setLoading( false );
-
 		} );
-
-	}, [ quantidade, somenteDestaques, categoria ] );
+	}, [ quantidade, somenteDestaques, categoria, ordenacao ] );
 
 	return {
 		servicos,
 		loading,
 	};
-
 }

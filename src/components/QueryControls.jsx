@@ -62,6 +62,35 @@ export default function QueryControls( {
 						} )
 					}
 				/>
+
+				<SelectControl
+					label="Ordenação"
+					value={ attributes.ordenacao }
+					options={ [
+						{
+							label: 'Mais recentes',
+							value: 'recentes',
+						},
+						{
+							label: 'Mais antigos',
+							value: 'antigos',
+						},
+						{
+							label: 'A-Z',
+							value: 'az',
+						},
+						{
+							label: 'Z-A',
+							value: 'za',
+						},
+					] }
+					onChange={ ( value ) =>
+						setAttributes( {
+							ordenacao: value,
+						} )
+					}
+				/>
+				
 			</PanelBody>
 		</InspectorControls>
 	);

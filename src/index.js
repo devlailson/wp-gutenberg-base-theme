@@ -17,7 +17,8 @@ registerBlockType(
 			} = useServices(
 				attributes.quantidade,
 				attributes.somenteDestaques,
-				attributes.categoria
+				attributes.categoria,
+				attributes.ordenacao
 			);
 
 			return (

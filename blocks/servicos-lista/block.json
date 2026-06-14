@@ -19,7 +19,12 @@
 		"categoria": {
 			"type": "string",
 			"default": ""
+		},
+		"ordenacao": {
+			"type": "string",
+			"default": "recentes"
 		}
+
 	},
 	"editorScript": "mtb-servicos-lista-editor",
 	"render": "file:./render.php"
