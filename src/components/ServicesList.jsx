@@ -1,5 +1,13 @@
 export default function ServicesList( { servicos } ) {
 
+	if ( ! servicos.length ) {
+		return (
+			<p className="mtb-empty-message">
+				Nenhum serviço encontrado.
+			</p>
+		);
+	}
+
 	return (
 		<div className="grid-servicos">
 

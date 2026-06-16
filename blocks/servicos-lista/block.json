@@ -23,8 +23,12 @@
 		"ordenacao": {
 			"type": "string",
 			"default": "recentes"
+		},
+		"busca": {
+			"type": "string",
+			"default": ""
 		}
-
+		
 	},
 	"editorScript": "mtb-servicos-lista-editor",
 	"render": "file:./render.php"

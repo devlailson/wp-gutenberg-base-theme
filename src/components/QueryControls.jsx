@@ -6,6 +6,7 @@ import {
 	RangeControl,
 	ToggleControl,
 	SelectControl,
+	TextControl,
 } from '@wordpress/components';
 
 export default function QueryControls( {
@@ -36,6 +37,17 @@ export default function QueryControls( {
 					onChange={ ( value ) =>
 						setAttributes( {
 							somenteDestaques: value,
+						} )
+					}
+				/>
+
+				<TextControl
+					label="Buscar serviço"
+					value={ attributes.busca }
+					placeholder="Digite uma palavra..."
+					onChange={ ( value ) =>
+						setAttributes( {
+							busca: value,
 						} )
 					}
 				/>

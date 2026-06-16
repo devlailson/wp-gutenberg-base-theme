@@ -29,6 +29,10 @@ function mtb_register_servicos_rest_route() {
 					'default'           => 'recentes',
 					'sanitize_callback' => 'sanitize_text_field',
 				),
+				'busca' => array(
+					'default'           => '',
+					'sanitize_callback' => 'sanitize_text_field',
+				),
 			),
 		)
 	);
@@ -52,6 +56,7 @@ function mtb_get_servicos_rest( WP_REST_Request $request ) {
 	$destaque   = $request->get_param( 'destaque' );
 	$categoria  = $request->get_param( 'categoria' );
 	$ordenacao  = $request->get_param( 'ordenacao' );
+	$busca      = $request->get_param( 'busca' );
 	$args = array(
 		'post_type'      => 'servico',
 		'posts_per_page' => $quantidade ? $quantidade : 6,
@@ -96,6 +101,10 @@ function mtb_get_servicos_rest( WP_REST_Request $request ) {
 			$args['orderby'] = 'date';
 			$args['order']   = 'DESC';
 			break;
+	}
+
+	if ( $busca ) {
+		$args['s'] = $busca;
 	}
 
 	$query = new WP_Query( $args );
