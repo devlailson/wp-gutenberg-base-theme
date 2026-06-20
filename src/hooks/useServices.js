@@ -9,7 +9,10 @@ export default function useServices(
 	busca
 ) {
 	const [ servicos, setServicos ] = useState( [] );
+
 	const [ loading, setLoading ] = useState( true );
+
+	const [ total, setTotal ] = useState( 0 );
 
 	useEffect( () => {
 		setLoading( true );
@@ -27,13 +30,14 @@ export default function useServices(
 				'&busca=' +
 				busca,
 		} ).then( ( response ) => {
-			setServicos( response );
-			setLoading( false );
+			setServicos( response.items );
+            setTotal( response.total );
 		} );
 	}, [ quantidade, somenteDestaques, categoria, ordenacao, busca ] );
 
 	return {
 		servicos,
+		total,
 		loading,
 	};
 }

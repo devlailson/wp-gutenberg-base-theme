@@ -128,8 +128,12 @@ function mtb_get_servicos_rest( WP_REST_Request $request ) {
 
 	wp_reset_postdata();
 
-	return rest_ensure_response( $servicos );
-
+	return rest_ensure_response(
+		array(
+			'items' => $servicos,
+			'total' => $query->found_posts,
+		)
+	);
 }
 
 function mtb_get_categorias_rest() {

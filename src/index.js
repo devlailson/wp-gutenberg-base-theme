@@ -13,6 +13,7 @@ registerBlockType(
 
 			const {
 				servicos,
+				total,
 				loading,
 			} = useServices(
 				attributes.quantidade,
@@ -30,6 +31,12 @@ registerBlockType(
 					/>
 
 					<h3>Lista de Serviços</h3>
+
+					<p>
+						{ total === 1
+							? '1 serviço encontrado'
+							: `${ total } serviços encontrados` }
+					</p>
 
 					{ loading ? (
 						<Spinner />
