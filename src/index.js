@@ -20,7 +20,8 @@ registerBlockType(
 				attributes.somenteDestaques,
 				attributes.categoria,
 				attributes.ordenacao,
-				attributes.busca
+				attributes.busca,
+				attributes.pagina
 			);
 
 			return (

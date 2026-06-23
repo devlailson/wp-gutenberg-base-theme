@@ -6,7 +6,8 @@ export default function useServices(
 	somenteDestaques,
 	categoria,
 	ordenacao,
-	busca
+	busca,
+	pagina
 ) {
 	const [ servicos, setServicos ] = useState( [] );
 
@@ -28,12 +29,14 @@ export default function useServices(
 				'&ordenacao=' +
 				ordenacao +
 				'&busca=' +
-				busca,
+				busca +
+				'&pagina=' +
+				pagina,
 		} ).then( ( response ) => {
 			setServicos( response.items );
             setTotal( response.total );
 		} );
-	}, [ quantidade, somenteDestaques, categoria, ordenacao, busca ] );
+	}, [ quantidade, somenteDestaques, categoria, ordenacao, busca, pagina ] );
 
 	return {
 		servicos,

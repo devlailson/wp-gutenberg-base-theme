@@ -33,6 +33,10 @@ function mtb_register_servicos_rest_route() {
 					'default'           => '',
 					'sanitize_callback' => 'sanitize_text_field',
 				),
+				'pagina' => array(
+					'default'           => 1,
+					'sanitize_callback' => 'absint',
+				),
 			),
 		)
 	);
@@ -56,12 +60,14 @@ function mtb_get_servicos_rest( WP_REST_Request $request ) {
 	$destaque   = $request->get_param( 'destaque' );
 	$categoria  = $request->get_param( 'categoria' );
 	$ordenacao  = $request->get_param( 'ordenacao' );
-	$busca      = $request->get_param( 'busca' );
+	$busca      = $request->get_param( 'busca' );	
+	$pagina 	= $request->get_param( 'pagina' );
 	$args = array(
 		'post_type'      => 'servico',
 		'posts_per_page' => $quantidade ? $quantidade : 6,
 		'post_status'    => 'publish',
 		'meta_query'     => array(),
+		'paged' => $pagina ? $pagina : 1,
 	);
 
 	if ( $destaque ) {
@@ -122,7 +128,7 @@ function mtb_get_servicos_rest( WP_REST_Request $request ) {
 			'thumbnail' => get_the_post_thumbnail_url( get_the_ID(), 'medium' ),
 			'preco'     => function_exists( 'get_field' ) ? get_field( 'preco' ) : '',
 			'categoria' => function_exists( 'get_field' ) ? get_field( 'categoria' ) : '',
-			'destaque'  => function_exists( 'get_field' ) ? (bool) get_field( 'destaque' ) : false,
+			'destaque'  => function_exists( 'get_field' ) ? (bool) get_field( 'destaque' ) : false,		
 		);
 	}
 
@@ -130,8 +136,10 @@ function mtb_get_servicos_rest( WP_REST_Request $request ) {
 
 	return rest_ensure_response(
 		array(
-			'items' => $servicos,
-			'total' => $query->found_posts,
+			'items'        => $servicos,
+			'total'        => $query->found_posts,
+			'total_pages'  => $query->max_num_pages,
+			'current_page' => $pagina ? $pagina : 1,
 		)
 	);
 }
