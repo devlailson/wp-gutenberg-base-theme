@@ -14,6 +14,8 @@ registerBlockType(
 			const {
 				servicos,
 				total,
+				totalPages,
+				currentPage,
 				loading,
 			} = useServices(
 				attributes.quantidade,
@@ -42,7 +44,41 @@ registerBlockType(
 					{ loading ? (
 						<Spinner />
 					) : (
-						<ServicesList servicos={ servicos } />
+						<>
+							<ServicesList servicos={ servicos } />
+
+							{ totalPages > 1 && (
+								<div className="mtb-pagination">
+									<button
+										type="button"
+										disabled={ currentPage <= 1 }
+										onClick={ () =>
+											setAttributes( {
+												pagina: currentPage - 1,
+											} )
+										}
+									>
+										Anterior
+									</button>
+
+									<span>
+										Página { currentPage } de { totalPages }
+									</span>
+
+									<button
+										type="button"
+										disabled={ currentPage >= totalPages }
+										onClick={ () =>
+											setAttributes( {
+												pagina: currentPage + 1,
+											} )
+										}
+									>
+										Próximo
+									</button>
+								</div>
+							) }
+						</>
 					) }
 				</div>
 			);
