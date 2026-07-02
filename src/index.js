@@ -4,12 +4,26 @@ import QueryControls from './components/QueryControls';
 
 import { registerBlockType } from '@wordpress/blocks';
 import { Spinner } from '@wordpress/components';
+import { useEffect } from '@wordpress/element';
 
 registerBlockType(
 	'meu-tema-base/servicos-lista',
 	{
 		edit( props ) {
 			const { attributes, setAttributes } = props;
+
+			useEffect( () => {
+				if ( attributes.pagina !== 1 ) {
+					setAttributes( {
+						pagina: 1,
+					} );
+				}
+			}, [
+				attributes.busca,
+				attributes.categoria,
+				attributes.ordenacao,
+				attributes.somenteDestaques,
+			] );
 
 			const {
 				servicos,
