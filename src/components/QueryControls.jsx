@@ -7,6 +7,7 @@ import {
 	ToggleControl,
 	SelectControl,
 	TextControl,
+	Button,
 } from '@wordpress/components';
 
 export default function QueryControls( {
@@ -102,7 +103,20 @@ export default function QueryControls( {
 						} )
 					}
 				/>
-				
+				<Button
+					variant="secondary"
+					onClick={ () =>
+						setAttributes( {
+							busca: '',
+							categoria: '',
+							ordenacao: 'recentes',
+							somenteDestaques: false,
+							pagina: 1,
+						} )
+					}
+				>
+					Limpar filtros
+				</Button>
 			</PanelBody>
 		</InspectorControls>
 	);
