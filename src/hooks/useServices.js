@@ -19,8 +19,12 @@ export default function useServices(
 
 	const [ currentPage, setCurrentPage ] = useState( 1 );
 
+	const [ error, setError ] = useState( null );
+
 	useEffect( () => {
 		setLoading( true );
+
+		setError( null );
 
 		apiFetch( {
 			path:
@@ -42,6 +46,9 @@ export default function useServices(
 				setTotalPages( response.total_pages );
 				setCurrentPage( response.current_page );
 				setLoading( false );
+			} ).catch( () => {
+				setError( 'Não foi possível carregar os serviços.' );
+				setLoading( false );
 			} );
 	}, [ quantidade, somenteDestaques, categoria, ordenacao, busca, pagina ] );
 
@@ -51,5 +58,6 @@ export default function useServices(
 		loading,
 		totalPages,
 		currentPage,
+		error,
 	};
 }
